@@ -42,6 +42,25 @@ const destroy = (req, res) => {
     .catch(error => res.status(500).send(error))
 }
 
+const getLikes = (req, res) => {
+  Photo.findById(req.params.id)
+    .then(photo => res.status(200).send({
+      likes: photo.likes
+    }))
+    .catch(error => res.status(500).send(error))
+}
+
+const sendLike = (req, res) => {
+  Photo.findByIdAndUpdate(req.params.id)
+    .then(photo => {
+      photo.likes.push(req.body.userId)
+      res.status(200).send({
+        likes: photo.likes
+      })
+    })
+    .catch(error => res.status(500).send(error))
+}
+
 module.exports = {
   findAll,
   create,

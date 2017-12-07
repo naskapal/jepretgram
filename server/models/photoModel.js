@@ -9,6 +9,9 @@ const photoSchema = mongoose.Schema({
   },
   path: String,
   caption: String,
+  likes: [
+    type: Schema.Types.ObjectId
+  ]
   // comment: String
 })
 
