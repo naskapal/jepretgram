@@ -1,5 +1,5 @@
 const Multer  = require('multer')
-      multer = Multer({ dest: 'uploads/' })
+      multer = Multer({ dest: 'public/' })
       
       
 const savePhoto = (req, res, next) => {

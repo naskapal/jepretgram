@@ -9,7 +9,7 @@ const findAll = (req, res) => {
 const create = (req, res) => {
   let photo = new Photo ({
     author: req.body.author,
-    path: req.body.filename,
+    path: './public/' + req.body.filename,
     caption: req.body.caption
   })
   
@@ -66,5 +66,7 @@ module.exports = {
   create,
   findByOwner,
   editCaption,
-  destroy
+  destroy,
+  getLikes,
+  sendLike
 }

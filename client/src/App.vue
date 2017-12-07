@@ -5,15 +5,24 @@
         <TheNavbar/>
       </nav>
     </div>
+    <login v-if="showLogin"/>
     <router-view/>
   </div>
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import TheNavbar from '@/components/TheNavbar'
+import Login from '@/components/LoginComponent'
 export default {
   components: {
-    'TheNavbar': TheNavbar
+    'TheNavbar': TheNavbar,
+    'login': Login
+  },
+  computed: {
+    ...mapState([
+      'showLogin'
+    ])
   },
   name: 'app'
 }
