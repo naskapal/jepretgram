@@ -8,7 +8,7 @@ const savePhoto = (req, res, next) => {
       msg: "no photo found"
     })
   } else {
-    req.file = Date.now() + req.file.originalname
+    req.body.filename = Date.now() + '_' +  req.file.originalname
     next()
   }
 }

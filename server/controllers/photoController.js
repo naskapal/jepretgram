@@ -9,7 +9,7 @@ const findAll = (req, res) => {
 const create = (req, res) => {
   let photo = new Photo ({
     author: req.body.author,
-    // path: path di lokal nanti
+    path: req.body.filename,
     caption: req.body.caption
   })
   
@@ -29,13 +29,15 @@ const findByOwner = (req, res) => {
 const editCaption = (req, res) => {
   Photo.findByIdAndUpdate(req.params.id, {
     caption: req.body.caption
+  }, {
+    new: true
   })
+    .then(success => res.status(200).send(success))
+    .catch(error => res.status(500).send(error))
 }
 
 const destroy = (req, res) => {
-  Photo.remove({
-    id: req.params.id
-  })
+  Photo.findByIdAndRemove(req.params.id)
     .then(success => res.status(200).send(success))
     .catch(error => res.status(500).send(error))
 }
