@@ -9,7 +9,7 @@ const findAll = (req, res) => {
 const create = (req, res) => {
   let photo = new Photo ({
     author: req.body.author,
-    path: './public/' + req.body.filename,
+    path: req.file.cloudStoragePublicUrl,
     caption: req.body.caption
   })
   
@@ -53,7 +53,7 @@ const getLikes = (req, res) => {
 const sendLike = (req, res) => {
   Photo.findByIdAndUpdate(req.params.id)
     .then(photo => {
-      photo.likes.push(req.body.userId)
+      photo.likes = req.body.likes
       res.status(200).send({
         likes: photo.likes
       })

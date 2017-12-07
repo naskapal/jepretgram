@@ -60,3 +60,4 @@ typings/
 
 # config files
 *.config.js
+keyfile.json
