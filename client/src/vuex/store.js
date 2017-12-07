@@ -8,7 +8,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     showLogin: false,
-    photos: []
+    photos: [],
+    photo: '',
+    caption: ''
   },
   actions,
   mutations

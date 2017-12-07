@@ -7,9 +7,14 @@ const actions = {
     axios.get(baseURL + '/photos')
       .then(({data}) => commit('updatePhotos', data))
       .catch(error => console.log(error))
-  }
-  getPhoto ({commit}, path) {
-    
+  },
+  uploadPhoto ({commit, state}) {
+    let data = new FormData()
+    data.append('photo', state.photo, state.photo.name)
+    const config = {
+      headers: { 'content-type': 'multipart/form-data' }
+    }
+    axios.post(baseURL + '/photos', {caption: state.caption, photo: data}, config)
   }
 }
 
