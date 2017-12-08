@@ -20,16 +20,67 @@
           </router-link>
         </li>
       </ul>
+      <ul class="navbar-nav float-right">
+        <li v-if="loggedIn" class="nav-item">
+            <h5>Halo {{username}}</h5>
+        </li>
+        <li class="nav-item">
+            <h5 class="nav-link" @click="showRegister">Register</h5>
+        </li>
+        <li class="nav-item">
+            <h5 v-if="loggedIn" class="nav-link" @click="destroyToken">Logout</h5>
+            <h5 v-else class="nav-link" @click="showLogin">Login</h5>
+        </li>
+      </ul>
     </div>
+    <LoginComponent v-if="loggingIn" @hide-me="hideLogin"/>
+    <RegisterForm v-if="register" @hide-me="hideRegister"/>
   </div>
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapState, mapActions} from 'vuex'
+import LoginComponent from '@/components/LoginComponent'
+import RegisterForm from '@/components/RegisterForm'
 export default {
+  components: {
+    'LoginComponent': LoginComponent,
+    'RegisterForm': RegisterForm
+  },
+  data () {
+    return {
+      'loggingIn': false,
+      'loggedIn': false,
+      'register': false
+    }
+  },
+  methods: {
+    ...mapActions([
+      'decodeToken',
+      'logout'
+    ]),
+    showLogin () {
+      this.loggingIn = true
+    },
+    showRegister () {
+      this.register = true
+    },
+    hideLogin () {
+      this.loggingIn = false
+      this.loggedIn = true
+      this.decodeToken()
+    },
+    hideRegister () {
+      this.register = false
+    },
+    destroyToken () {
+      this.logout()
+      this.loggedIn = false
+    }
+  },
   computed: {
     ...mapState([
-      'showLogin'
+      'username'
     ])
   }
 }
