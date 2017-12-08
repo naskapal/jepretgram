@@ -1,7 +1,7 @@
 import axios from 'axios'
 import jwt from 'jsonwebtoken'
 
-const baseURL = 'http://localhost:3000'
+const baseURL = 'http://api.jepretgram.rizkysaputro.com'
 
 let body = {}
 // let headers = {}
